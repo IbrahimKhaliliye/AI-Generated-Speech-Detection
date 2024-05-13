@@ -30,12 +30,13 @@ def extract_features(wav_file, sr=22050):
 # Function to augment audio data
 def augment_audio(y, sr):
     y_noise = y + 0.005 * np.random.randn(len(y))  # Add noise
-    y_stretch = librosa.effects.time_stretch(y, rate=1.1)  # Time stretching
-    y_pitch = librosa.effects.pitch_shift(y, sr, n_steps=4)  # Pitch shifting
+    y_stretch = librosa.effects.time_stretch(y, rate=np.random.uniform(0.75, 1.25))  # Time stretching
+    y_pitch = librosa.effects.pitch_shift(y, sr, n_steps=np.random.randint(0,3))  # Pitch shifting
     return [y, y_noise, y_stretch, y_pitch]
 
 # Load dataset
-dataset = r"HOT el Data Set Hoon Ya 3li"
+dataset = r"C:\Users\alisa\Downloads\DATASET-balanced.csv"
+
 data = pd.read_csv(dataset)
 data['LABEL'] = data['LABEL'].replace({'FAKE': '0', 'REAL': 1})  # Replace label strings with numerical values
 
