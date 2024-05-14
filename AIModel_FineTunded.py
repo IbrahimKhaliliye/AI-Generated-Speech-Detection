@@ -38,7 +38,7 @@ def augment_audio(y, sr):
 dataset = r"C:\Users\alisa\Downloads\DATASET-balanced.csv"
 
 data = pd.read_csv(dataset)
-data['LABEL'] = data['LABEL'].replace({'FAKE': '0', 'REAL': 1})  # Replace label strings with numerical values
+data['LABEL'] = data['LABEL'].replace({'FAKE': 0, 'REAL': 1})  # Replace label strings with numerical values
 
 # Extract features and labels
 X = data.iloc[:, :-1].values
@@ -88,3 +88,4 @@ y_pred_classes = np.argmax(y_pred, axis=1)
 y_true = np.argmax(y_test, axis=1)
 print(confusion_matrix(y_true, y_pred_classes))
 print(classification_report(y_true, y_pred_classes))
+
