@@ -2,11 +2,10 @@ import sys
 import numpy as np
 import sounddevice as sd
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
-from tensorflow import load_model
+from tensorflow.keras.models import load_model
 
 # Load the model
-model = load_model('/Users/admin/Desktop/AI-Generated-Speech-Detection/detectionmodel.h5')
-
+model = load_model(r'C:\Users\alisa\OneDrive\Desktop\GenGuard\AI-Generated-Speech-Detection\detectionmodel.keras')
 class AppDemo(QMainWindow):
     def __init__(self):
         super().__init__()
