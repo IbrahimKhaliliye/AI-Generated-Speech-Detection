@@ -69,35 +69,57 @@ for filename in os.listdir(fake_dir):
         audio.append(filepath)
         labels.append(1)
 
+audio = audio[:1000]+audio[-1000:]
+labels = labels[:1000]+labels[-1000:]
+
+
+audio_validate = audio[35001:36001]+audio[142001:143001]
+label_validate = labels[35001:36001]+labels[142001:143001]
 X = []
 y = []
+
 segment_length = 128
 hop_length = 64
-
+sampling_rate = 44100
 for file_path, label in zip(audio, labels):
     try:
-        y_audio, sr = librosa.load(file_path, sr=None)
-        augmented_samples = augment_audio(y_audio, sr)
+        y_audio, sr = librosa.load(file_path, sr = sampling_rate)
+        augmented_samples = (augment_audio(y_audio, sr))
         for sample in augmented_samples:
-            mel_spect = librosa.feature.melspectrogram(sample, sr=sr, n_mels=128)
-            mel_spect = librosa.power_to_db(mel_spect, ref=np.max)
+            
+            mel_spectrogram = librosa.feature.melspectrogram(y=sample, n_mels=128, sr=target_sr)
+            mel_spect = librosa.power_to_db(mel_spectrogram, ref=np.max)
             segments = segment_mel_spectrogram(mel_spect, segment_length=segment_length, hop_length=hop_length)
             X.extend(segments)
             y.extend([label] * len(segments))
     except:
         pass
+        
+
+
 
 X = np.array(X)
 X = X[..., np.newaxis]  
 y = np.array(y)
 
+print(X)
+print(y)
 
 label_encoder = LabelEncoder()
 y = label_encoder.fit_transform(y)
 
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+from sklearn.model_selection import train_test_split
 
+
+
+# Adjust the parameters as needed
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,  # Adjust the test set size
+    train_size=0.8  # Specify the training set size
+)
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(segment_length, segment_length, 1), padding='same', kernel_regularizer=l2(0.001)))
@@ -129,17 +151,13 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_wei
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5)
 
 
-history = model.fit(X_train, y_train, epochs=100, validation_data=(X_test, y_test), callbacks=[early_stopping, reduce_lr])
+history = model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test), callbacks=[early_stopping, reduce_lr])
 
 
-model.save('spectromodel1.keras')
+model.save('spectromodel2.keras')
 
 
-audio_train = audio[:45000]+audio[57151:142000]
-label_train = labels[:45000]+labels[57151:142000]
 
-audio_validate = audio[45001:57150]+audio[142001:]
-label_validate = labels[45001:57150]+labels[142001:]
 
 A = []
 b = []
