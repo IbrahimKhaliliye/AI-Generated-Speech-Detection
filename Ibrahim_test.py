@@ -6,20 +6,26 @@ from sklearn.preprocessing import StandardScaler, LabelBinarizer
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 from sklearn.model_selection import KFold, GridSearchCV
 import warnings
-
+import joblib
 warnings.filterwarnings('ignore')
 
 # Load the dataset
-dataset_path = '/Users/admin/Downloads/archive/KAGGLE/DATASET-balanced.csv'  # Replace with the correct path
+dataset_path = r'C:\Users\alisa\Downloads\DATASET-balanced.csv'  # Replace with the correct path
 df = pd.read_csv(dataset_path)
+df['LABEL'] = df['LABEL'].replace({'FAKE': 0, 'REAL': 1})  # Replace label strings with numerical values
+
+
+#########
+df_train = df[:-2000]
+#########
+df_validate = df[-2000:]
 
 # Separate features and labels
-y = df['LABEL']
-X = df.drop(columns=['LABEL'])
+y = df_train['LABEL']
+X = df_train.drop(columns=['LABEL'])
 
-# Binarise the Labels for Binary Classification
-lb = LabelBinarizer()
-y = lb.fit_transform(y).ravel()
+
+
 
 # Normalize the feature data
 scaler = StandardScaler()
@@ -76,3 +82,7 @@ print("Precision: " + str(round(np.mean(precision_scores) * 100, 3)) + "% (" + s
 print("Recall: " + str(round(np.mean(recall_scores) * 100, 3)) + "% (" + str(round(np.std(recall_scores) * 100, 3)) + "%)")
 print("F1-Score: " + str(round(np.mean(f1_scores) * 100, 3)) + "% (" + str(round(np.std(f1_scores) * 100, 3)) + "%)")
 print("ROC AUC Score: " + str(round(np.mean(roc_auc_scores) * 100, 3)) + "% (" + str(round(np.std(roc_auc_scores) * 100, 3)) + "%)")
+
+
+model_path = 'rforrest.joblib'
+joblib.dump(model, model_path)
