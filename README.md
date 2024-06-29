@@ -24,8 +24,8 @@ Here is a brief description of each file and notebook in this repository:
   - `testingallmodels.ipynb`: Notebook for testing different models on the same dataset.
   - `testforotherdataset.ipynb`: Notebook for testing models on a different dataset.
   - `trial.ipynb`: Notebook for trial runs of various models.
-  - `Ibrahim_test.py`: Python script for testing models.
-  - `ibrahimtestnotebook.ipynb`: Notebook for experimental models and tests by Ibrahim.
+  - `test.py`: Python script for testing models.
+  - `test.ipynb`: Notebook for experimental models and tests by Ibrahim.
 
 - **Data Processing and Fixes:**
 
