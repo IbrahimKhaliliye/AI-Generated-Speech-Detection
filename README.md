@@ -51,7 +51,10 @@ Make sure you have the following installed:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/repo-name.git
    cd repo-name
+   pip install -r requirements.txt
+
    ```
