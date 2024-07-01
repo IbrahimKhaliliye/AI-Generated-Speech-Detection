@@ -1,4 +1,5 @@
 # Audio and Image Classification Models
+This is the work of Ali Saffarini and Ibrahim Khalilye
 
 This repository contains various implementations of models for audio and image classification tasks. The models include convolutional neural networks (CNNs) and other machine learning techniques. Each implementation is provided in separate files and notebooks for ease of understanding and experimentation.
 
@@ -7,17 +8,18 @@ This repository contains various implementations of models for audio and image c
 Here is a brief description of each file and notebook in this repository:
 
 - **Audio Classification:**
-
+These classifications are reliant on the data of the frequencies of the audio as well as some other important features, like rms, chroma_stft, rolloff, etc.
   - `Audio_Classification_CNN_Notebook.ipynb`: Notebook for training a CNN model on audio data.
   - `Wav_MFCCS.ipynb`: Notebook for extracting Mel-Frequency Cepstral Coefficients (MFCCs) from WAV files for audio classification.
-
+  - `AIModel_FineTunded.py`: Python script for fine-tuning an AI model.
+  - `anothermodel.py`: Python script for another image classification model.
+ - `AImodel.py`: Python script for an AI model for classification tasks.
 - **Image Classification:**
-
+These models were inspired by the idea of classifying the audio files based on the images of their waveforms.
   - `imagemodel.ipynb`: Notebook for a basic image classification model.
   - `largerimagemodel.ipynb`: Notebook for a more complex image classification model designed for larger datasets.
   - `fineTunedImage.py`: Python script for fine-tuning an image classification model.
-  - `AIModel_FineTunded.py`: Python script for fine-tuning an AI model.
-  - `anothermodel.py`: Python script for another image classification model.
+ 
 
 - **Model Testing and Trials:**
 
@@ -35,7 +37,6 @@ Here is a brief description of each file and notebook in this repository:
 - **Miscellaneous:**
   - `testrforrest.py`: Python script for testing a random forest model for classification tasks.
   - `Software.py`: Python script for software-related functionality.
-  - `AImodel.py`: Python script for an AI model for classification tasks.
   - `settings.json`: Configuration file for terminal settings to disable OneDNN optimizations for TensorFlow.
 
 ## Getting Started
