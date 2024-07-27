@@ -1,5 +1,5 @@
 # Audio and Image Classification Models
-This is the work of Ali Saffarini and Ibrahim Khalilye
+This is the work of Ali Saffarini and Ibrahim Khaliliye
 
 This repository contains various implementations of models for audio and image classification tasks. The models include convolutional neural networks (CNNs) and other machine learning techniques. Each implementation is provided in separate files and notebooks for ease of understanding and experimentation.
 
