@@ -44,7 +44,7 @@ These models were inspired by the idea of classifying the audio files based on t
 ### Prerequisites
 
 Make sure you have the following installed:
-
+- Link to pretrained models: https://drive.google.com/drive/folders/1u_RbokM4mtJtv4jY8p5LBbef-oFxgDqO?usp=sharing
 - Python 3.x
 - Jupyter Notebook
 - Required libraries: TensorFlow, Keras, scikit-learn, pandas, numpy, matplotlib, etc.
